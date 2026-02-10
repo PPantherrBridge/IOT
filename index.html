@@ -8,6 +8,30 @@
 
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
 
+        @property --mood-1 {
+            syntax: '<color>';
+            inherits: true;
+            initial-value: #26365b;
+        }
+
+        @property --mood-2 {
+            syntax: '<color>';
+            inherits: true;
+            initial-value: #452d57;
+        }
+
+        @property --mood-3 {
+            syntax: '<color>';
+            inherits: true;
+            initial-value: #0b111d;
+        }
+
+        @property --nav-tint {
+            syntax: '<color>';
+            inherits: true;
+            initial-value: #452d57;
+        }
+
         :root {
             --bg: #101725;
             --bg-soft: #1b2640;
@@ -17,6 +41,10 @@
             --ink-muted: #6f5544;
             --accent: #c77d3f;
             --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+            --mood-1: #d4f0dd;
+            --mood-2: #a7dcb8;
+            --mood-3: #6ea987;
+            --nav-tint: #a7dcb8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,21 +56,12 @@
             line-height: 1.9;
             color: var(--ink);
             background:
-                radial-gradient(circle at 15% 20%, #26365b 0%, transparent 30%),
-                radial-gradient(circle at 85% 10%, #452d57 0%, transparent 35%),
-                linear-gradient(160deg, var(--bg) 0%, #141d2f 40%, #0b111d 100%);
+                radial-gradient(circle at 15% 20%, var(--mood-1) 0%, transparent 35%),
+                radial-gradient(circle at 85% 10%, var(--mood-2) 0%, transparent 40%),
+                linear-gradient(160deg, color-mix(in srgb, var(--mood-1) 50%, var(--bg) 50%) 0%, color-mix(in srgb, var(--mood-2) 55%, #141d2f 45%) 45%, var(--mood-3) 100%);
             min-height: 100vh;
-            transition: background 500ms ease, color 300ms ease;
+            transition: --mood-1 1200ms ease, --mood-2 1200ms ease, --mood-3 1200ms ease, --nav-tint 1200ms ease, background 1200ms ease, color 300ms ease;
         }
-
-
-        body.mood-hope { background: linear-gradient(160deg, #1f3a45 0%, #224e55 42%, #172a32 100%); }
-        body.mood-despair { background: linear-gradient(160deg, #2b1f2f 0%, #311c2a 45%, #1b1420 100%); }
-        body.mood-tragedy { background: linear-gradient(160deg, #3c1f27 0%, #2a1b33 45%, #121422 100%); }
-        body.mood-revelation { background: linear-gradient(160deg, #1c2755 0%, #312a6a 45%, #10163a 100%); }
-        body.mood-cosmic { background: linear-gradient(160deg, #0b1a3a 0%, #192a5f 45%, #090f27 100%); }
-        body.mood-sacrifice { background: linear-gradient(160deg, #351d49 0%, #4b2655 45%, #1c1028 100%); }
-        body.mood-peace { background: linear-gradient(160deg, #1d3a4c 0%, #2c5d72 45%, #132533 100%); }
         .navbar {
             position: fixed;
             top: 18px;
@@ -50,14 +69,14 @@
             transform: translateX(-50%) translateY(-130px);
             width: min(940px, calc(100% - 24px));
             border-radius: 999px;
-            background: rgba(11, 18, 32, 0.78);
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
+            background: color-mix(in srgb, var(--nav-tint) 28%, rgba(255, 255, 255, 0.22));
+            border: 1px solid color-mix(in srgb, var(--nav-tint) 45%, rgba(255, 255, 255, 0.3));
+            box-shadow: 0 12px 38px rgba(0, 0, 0, 0.26);
+            backdrop-filter: blur(22px) saturate(165%);
+            -webkit-backdrop-filter: blur(22px) saturate(165%);
             z-index: 1000;
             opacity: 0;
-            transition: transform 450ms ease, opacity 350ms ease;
+            transition: transform 450ms ease, opacity 350ms ease, background 1200ms ease, border-color 1200ms ease;
         }
 
         .navbar.loaded { transform: translateX(-50%) translateY(0); opacity: 1; }
@@ -73,7 +92,7 @@
 
         .navbar-title {
             font-family: 'Inter', sans-serif;
-            color: #f4e8d8;
+            color: #1f2333;
             font-size: 0.95rem;
             letter-spacing: 0.16em;
             text-transform: uppercase;
@@ -84,7 +103,7 @@
 
         .navbar-links a {
             text-decoration: none;
-            color: rgba(244, 232, 216, 0.95);
+            color: rgba(24, 29, 42, 0.92);
             font-family: 'Inter', sans-serif;
             font-size: 0.78rem;
             letter-spacing: 0.07em;
@@ -92,11 +111,11 @@
             transition: color 250ms ease, transform 250ms ease;
         }
 
-        .navbar-links a:hover { color: #ffd4a8; transform: translateY(-1px); }
+        .navbar-links a:hover { color: #3f3d88; transform: translateY(-1px); }
 
         .theme-toggle {
-            border: 1px solid rgba(255, 255, 255, 0.28);
-            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid color-mix(in srgb, var(--nav-tint) 45%, rgba(255, 255, 255, 0.45));
+            background: color-mix(in srgb, var(--nav-tint) 18%, rgba(255, 255, 255, 0.35));
             border-radius: 999px;
             width: 42px;
             height: 42px;
@@ -108,7 +127,7 @@
         .theme-toggle svg {
             width: 19px;
             height: 19px;
-            stroke: #ffe2bf;
+            stroke: #23253a;
             stroke-width: 2;
             fill: none;
             transition: transform 300ms ease;
@@ -258,20 +277,34 @@
         }
 
         body.dark-mode {
+            --bg: #0d1020;
             --paper: rgba(20, 24, 33, 0.9);
             --paper-line: rgba(220, 202, 171, 0.2);
             --ink: #e8dccc;
             --ink-muted: #c7b7a2;
             --accent: #f1a96c;
-            background:
-                radial-gradient(circle at 15% 20%, #281f46 0%, transparent 30%),
-                radial-gradient(circle at 85% 10%, #12365e 0%, transparent 35%),
-                linear-gradient(160deg, #0a1020 0%, #091223 45%, #050a12 100%);
+            --mood-1: #251a4a;
+            --mood-2: #2c3672;
+            --mood-3: #0b1028;
+            --nav-tint: #2c3672;
         }
 
         body.dark-mode .navbar {
-            background: rgba(12, 16, 27, 0.85);
-            border-color: rgba(255, 231, 204, 0.25);
+            border-color: color-mix(in srgb, var(--nav-tint) 50%, rgba(255, 231, 204, 0.25));
+            box-shadow: 0 12px 38px rgba(0, 0, 0, 0.42);
+        }
+
+        body.dark-mode .navbar-title,
+        body.dark-mode .navbar-links a {
+            color: rgba(243, 233, 218, 0.94);
+        }
+
+        body.dark-mode .navbar-links a:hover {
+            color: #ffd8af;
+        }
+
+        body.dark-mode .theme-toggle svg {
+            stroke: #ffe0c0;
         }
 
         body.dark-mode .book-content::before { opacity: 0.18; mix-blend-mode: screen; }
@@ -1117,7 +1150,26 @@
             'cosmic','revelation','despair','revelation','cosmic','cosmic','sacrifice','sacrifice','sacrifice','cosmic','peace'
         ];
 
-        const moodClasses = ['mood-hope','mood-love','mood-despair','mood-tragedy','mood-revelation','mood-cosmic','mood-sacrifice','mood-peace'];
+        const moodGradients = {
+            light: {
+                hope: ['#d4f0dd', '#a7dcb8', '#6ea987'],
+                despair: ['#ead7ef', '#c6a8d8', '#9375b0'],
+                tragedy: ['#f6d2d8', '#d696a7', '#a56478'],
+                revelation: ['#d9e3ff', '#a7bbff', '#708fd8'],
+                cosmic: ['#c9ddff', '#8baef6', '#5776cc'],
+                sacrifice: ['#ead8ff', '#be9be8', '#8766b9'],
+                peace: ['#cfeff1', '#9fd7df', '#62aebd']
+            },
+            dark: {
+                hope: ['#173a2f', '#215d47', '#0f251d'],
+                despair: ['#301b3b', '#4a2a59', '#1a1021'],
+                tragedy: ['#3a1b2d', '#5b2b44', '#200f1a'],
+                revelation: ['#1a2551', '#2f3f84', '#0c1530'],
+                cosmic: ['#0d1c48', '#1c3480', '#070e26'],
+                sacrifice: ['#2d1947', '#472870', '#160b24'],
+                peace: ['#12364a', '#1f5672', '#0c1f2c']
+            }
+        };
 
         let chapterElements = [];
         let scrollFrame;
@@ -1132,10 +1184,17 @@
             sunIcon.style.display = darkEnabled ? 'none' : 'block';
             moonIcon.style.display = darkEnabled ? 'block' : 'none';
             localStorage.setItem('theme', darkEnabled ? 'dark' : 'light');
+            updateBackgroundMood();
         }
 
-        function removeMoodClasses() {
-            document.body.classList.remove(...moodClasses);
+        function setMoodGradient(mood) {
+            const mode = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+            const palette = moodGradients[mode];
+            const [c1, c2, c3] = palette[mood] || palette.peace;
+            document.body.style.setProperty('--mood-1', c1);
+            document.body.style.setProperty('--mood-2', c2);
+            document.body.style.setProperty('--mood-3', c3);
+            document.body.style.setProperty('--nav-tint', c2);
         }
 
         function assignChapterIds() {
@@ -1160,9 +1219,8 @@
                 }
             });
 
-            removeMoodClasses();
             if (activeMood) {
-                document.body.classList.add(`mood-${activeMood}`);
+                setMoodGradient(activeMood);
             }
         }
 
