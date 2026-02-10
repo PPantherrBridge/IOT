@@ -5,563 +5,490 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Illusion of Tomorrow - A Story of Time, Love, and Sacrifice</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
-        
-        @font-face {
-            font-family: 'CMU Serif';
-            src: url('https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts/CMUSerif-Roman.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
+
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+        @property --mood-1 {
+            syntax: '<color>';
+            inherits: true;
+            initial-value: #26365b;
         }
-        
-        @font-face {
-            font-family: 'CMU Serif';
-            src: url('https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts/CMUSerif-Italic.woff2') format('woff2');
-            font-weight: normal;
-            font-style: italic;
+
+        @property --mood-2 {
+            syntax: '<color>';
+            inherits: true;
+            initial-value: #452d57;
         }
-        
-        @font-face {
-            font-family: 'CMU Serif';
-            src: url('https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts/CMUSerif-Bold.woff2') format('woff2');
-            font-weight: bold;
-            font-style: normal;
+
+        @property --mood-3 {
+            syntax: '<color>';
+            inherits: true;
+            initial-value: #0b111d;
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+
+        @property --nav-tint {
+            syntax: '<color>';
+            inherits: true;
+            initial-value: #452d57;
         }
-        
-        html {
-            scroll-behavior: smooth;
+
+        :root {
+            --bg: #101725;
+            --bg-soft: #1b2640;
+            --paper: rgba(252, 247, 240, 0.92);
+            --paper-line: rgba(90, 64, 45, 0.24);
+            --ink: #2b1d14;
+            --ink-muted: #6f5544;
+            --accent: #c77d3f;
+            --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+            --mood-1: #d4f0dd;
+            --mood-2: #a7dcb8;
+            --mood-3: #6ea987;
+            --nav-tint: #a7dcb8;
         }
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'CMU Serif', Georgia, serif;
-            background: #2b2520;
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(0,0,0,0.15) 0px,
-                    transparent 1px,
-                    transparent 2px,
-                    rgba(0,0,0,0.15) 3px
-                ),
-                linear-gradient(135deg, #3e2723 0%, #4e342e 50%, #5d4037 100%);
-            color: #2a1810;
-            line-height: 1.85;
-            font-size: 19px;
-            transition: background 1.5s ease, color 0.3s;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            line-height: 1.9;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 15% 20%, var(--mood-1) 0%, transparent 35%),
+                radial-gradient(circle at 85% 10%, var(--mood-2) 0%, transparent 40%),
+                linear-gradient(160deg, color-mix(in srgb, var(--mood-1) 50%, var(--bg) 50%) 0%, color-mix(in srgb, var(--mood-2) 55%, #141d2f 45%) 45%, var(--mood-3) 100%);
+            min-height: 100vh;
+            transition: --mood-1 1200ms ease, --mood-2 1200ms ease, --mood-3 1200ms ease, --nav-tint 1200ms ease, background 1200ms ease, color 300ms ease;
         }
-
-        body.dark-mode {
-            background: #0d0d0d;
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(255,255,255,0.02) 0px,
-                    transparent 1px,
-                    transparent 2px,
-                    rgba(255,255,255,0.02) 3px
-                ),
-                linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 50%, #000000 100%);
-        }
-
-        /* Story mood backgrounds - Light mode */
-        body.mood-hope {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
-        }
-
-        body.mood-love {
-            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
-        }
-
-        body.mood-despair {
-            background: linear-gradient(135deg, #37474f 0%, #455a64 50%, #546e7a 100%);
-        }
-
-        body.mood-tragedy {
-            background: linear-gradient(135deg, #263238 0%, #37474f 50%, #455a64 100%);
-        }
-
-        body.mood-revelation {
-            background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 50%, #ba68c8 100%);
-        }
-
-        body.mood-cosmic {
-            background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
-        }
-
-        body.mood-sacrifice {
-            background: linear-gradient(135deg, #4a148c 0%, #6a1b9a 50%, #7b1fa2 100%);
-        }
-
-        body.mood-peace {
-            background: linear-gradient(135deg, #b3e5fc 0%, #81d4fa 50%, #4fc3f7 100%);
-        }
-
-        /* Story mood backgrounds - Dark mode */
-        body.dark-mode.mood-hope {
-            background: linear-gradient(135deg, #1b3a1f 0%, #2e5533 50%, #3a6b3f 100%);
-        }
-
-        body.dark-mode.mood-love {
-            background: linear-gradient(135deg, #3d1a2b 0%, #5c2a40 50%, #7a3954 100%);
-        }
-
-        body.dark-mode.mood-despair {
-            background: linear-gradient(135deg, #0d1214 0%, #1a1f23 50%, #252c31 100%);
-        }
-
-        body.dark-mode.mood-tragedy {
-            background: linear-gradient(135deg, #0a0a0a 0%, #151515 50%, #1f1f1f 100%);
-        }
-
-        body.dark-mode.mood-revelation {
-            background: linear-gradient(135deg, #2d1b33 0%, #3f2847 50%, #51355b 100%);
-        }
-
-        body.dark-mode.mood-cosmic {
-            background: linear-gradient(135deg, #0a0e1f 0%, #151b33 50%, #1f2847 100%);
-        }
-
-        body.dark-mode.mood-sacrifice {
-            background: linear-gradient(135deg, #1a0a26 0%, #2a1539 50%, #3a1f4d 100%);
-        }
-
-        body.dark-mode.mood-peace {
-            background: linear-gradient(135deg, #1a2633 0%, #25374a 50%, #304861 100%);
-        }
-
         .navbar {
             position: fixed;
-            top: 20px;
+            top: 18px;
             left: 50%;
-            transform: translateX(-50%) translateY(-100px);
-            background: rgba(255, 248, 240, 0.85);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(139, 69, 19, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            transform: translateX(-50%) translateY(-130px);
+            width: min(940px, calc(100% - 24px));
+            border-radius: 999px;
+            background:
+                radial-gradient(130% 170% at 14% 0%, rgba(255, 255, 255, 0.42) 0%, rgba(255, 255, 255, 0.12) 36%, transparent 60%),
+                radial-gradient(100% 130% at 85% 100%, rgba(255, 255, 255, 0.28) 0%, transparent 62%),
+                color-mix(in srgb, var(--nav-tint) 34%, rgba(255, 255, 255, 0.22));
+            border: 1px solid color-mix(in srgb, var(--nav-tint) 40%, rgba(255, 255, 255, 0.5));
+            box-shadow:
+                0 14px 34px rgba(0, 0, 0, 0.24),
+                inset 0 1px 0 rgba(255, 255, 255, 0.48),
+                inset 0 -10px 18px rgba(255, 255, 255, 0.09);
+            backdrop-filter: blur(6px) saturate(130%) contrast(1.03);
+            -webkit-backdrop-filter: blur(6px) saturate(130%) contrast(1.03);
             z-index: 1000;
-            padding: 18px 35px;
-            border-radius: 50px;
-            max-width: 700px;
-            width: calc(100% - 40px);
             opacity: 0;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            isolation: isolate;
+            transition: transform 450ms ease, opacity 350ms ease, background 1200ms ease, border-color 1200ms ease, box-shadow 600ms ease;
         }
 
-        .navbar.loaded {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
+        .navbar::before,
+        .navbar::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
         }
 
-        body.dark-mode .navbar {
-            background: rgba(20, 20, 20, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+        .navbar::before {
+            background:
+                linear-gradient(108deg, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0.08) 34%, rgba(255, 255, 255, 0.22) 52%, rgba(255, 255, 255, 0.04) 78%);
+            mix-blend-mode: screen;
+            opacity: 0.5;
+            transform: translateX(-24%);
+            animation: liquid-sheen 8s ease-in-out infinite alternate;
         }
+
+        .navbar::after {
+            background:
+                radial-gradient(65% 85% at 22% 18%, rgba(255, 255, 255, 0.28) 0%, transparent 74%),
+                radial-gradient(68% 105% at 82% 75%, color-mix(in srgb, var(--nav-tint) 54%, rgba(255, 255, 255, 0.28)) 0%, transparent 76%);
+            filter: blur(8px);
+            opacity: 0.45;
+            animation: liquid-distortion 10s ease-in-out infinite;
+        }
+
+        .navbar.loaded { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .navbar.loaded.hidden { transform: translateX(-50%) translateY(-145px); opacity: 0; pointer-events: none; }
 
         .navbar-content {
+            position: relative;
+            z-index: 2;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 14px;
+            padding: 10px 20px;
+        }
+
+        @keyframes liquid-sheen {
+            0% { transform: translateX(-28%) scaleX(1); }
+            50% { transform: translateX(2%) scaleX(1.06); }
+            100% { transform: translateX(22%) scaleX(0.98); }
+        }
+
+        @keyframes liquid-distortion {
+            0% { transform: translateY(0) scale(1); }
+            40% { transform: translateY(-4px) scale(1.015); }
+            65% { transform: translateY(3px) scale(0.99); }
+            100% { transform: translateY(0) scale(1); }
         }
 
         .navbar-title {
-            font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 22px;
-            color: #3e2723;
-            letter-spacing: 1px;
-            transition: color 0.3s;
+            font-family: 'Inter', sans-serif;
+            color: #1f2333;
+            font-size: 0.95rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
 
-        body.dark-mode .navbar-title {
-            color: #e8d5c4;
-        }
-
-        .navbar-links {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
+        .navbar-links { display: flex; align-items: center; gap: 14px; }
 
         .navbar-links a {
-            font-family: 'CMU Serif', serif;
-            color: #5d4037;
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
-            letter-spacing: 0.5px;
+            color: rgba(24, 29, 42, 0.92);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            transition: color 250ms ease, transform 250ms ease;
         }
 
-        body.dark-mode .navbar-links a {
-            color: #b8a99a;
-        }
-
-        .navbar-links a:hover {
-            color: #8b4513;
-        }
-
-        body.dark-mode .navbar-links a:hover {
-            color: #d4c4b0;
-        }
+        .navbar-links a:hover { color: #3f3d88; transform: translateY(-1px); }
 
         .theme-toggle {
-            background: none;
-            border: none;
+            border: 1px solid color-mix(in srgb, var(--nav-tint) 45%, rgba(255, 255, 255, 0.45));
+            background: color-mix(in srgb, var(--nav-tint) 18%, rgba(255, 255, 255, 0.35));
+            border-radius: 999px;
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
             cursor: pointer;
-            padding: 8px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .theme-toggle svg {
-            width: 22px;
-            height: 22px;
-            stroke: #5d4037;
-            fill: none;
+            width: 19px;
+            height: 19px;
+            stroke: #23253a;
             stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            transition: all 0.3s;
+            fill: none;
+            transition: transform 300ms ease;
         }
 
-        body.dark-mode .theme-toggle svg {
-            stroke: #b8a99a;
+        .theme-toggle:hover svg { transform: rotate(15deg) scale(1.08); }
+
+
+        .menu-toggle {
+            display: none;
+            border: 1px solid color-mix(in srgb, var(--nav-tint) 45%, rgba(255, 255, 255, 0.45));
+            background: color-mix(in srgb, var(--nav-tint) 18%, rgba(255, 255, 255, 0.35));
+            border-radius: 999px;
+            width: 42px;
+            height: 42px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
         }
 
-        .theme-toggle:hover svg {
-            stroke: #8b4513;
-            transform: rotate(20deg);
+        .menu-toggle .bar {
+            width: 16px;
+            height: 2px;
+            border-radius: 99px;
+            background: #23253a;
+            transition: transform 250ms ease, opacity 250ms ease;
         }
 
-        body.dark-mode .theme-toggle:hover svg {
-            stroke: #d4c4b0;
-        }
-        
-        .page-wrapper {
-            min-height: 100vh;
-            padding: 120px 20px 60px;
-        }
-        
-        .book-container {
-            max-width: 850px;
-            margin: 0 auto;
-            background: linear-gradient(to bottom, #faf8f3 0%, #f5f1e8 100%);
-            box-shadow: 
-                0 0 0 1px rgba(139, 69, 19, 0.1),
-                0 2px 4px rgba(0,0,0,0.1),
-                0 8px 16px rgba(0,0,0,0.1),
-                0 16px 32px rgba(0,0,0,0.1),
-                inset 0 0 100px rgba(139, 69, 19, 0.02);
-            border-radius: 3px;
-            position: relative;
-            transition: all 0.3s;
-        }
+        .menu-toggle[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .menu-toggle[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; }
+        .menu-toggle[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
 
-        body.dark-mode .book-container {
-            background: linear-gradient(to bottom, #1a1a1a 0%, #0d0d0d 100%);
-            box-shadow: 
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                0 2px 4px rgba(0,0,0,0.3),
-                0 8px 16px rgba(0,0,0,0.3),
-                0 16px 32px rgba(0,0,0,0.3),
-                inset 0 0 100px rgba(255, 255, 255, 0.02);
-        }
-
-        .book-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(139, 69, 19, 0.03) 2px,
-                    rgba(139, 69, 19, 0.03) 3px
-                );
+        .mobile-menu {
+            position: fixed;
+            top: 62px;
+            right: 10px;
+            min-width: 210px;
+            padding: 10px;
+            border-radius: 14px;
+            background: color-mix(in srgb, var(--nav-tint) 28%, rgba(255, 255, 255, 0.55));
+            border: 1px solid color-mix(in srgb, var(--nav-tint) 45%, rgba(255, 255, 255, 0.35));
+            backdrop-filter: blur(6px) saturate(120%);
+            -webkit-backdrop-filter: blur(6px) saturate(120%);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+            z-index: 1100;
+            opacity: 0;
+            visibility: hidden;
             pointer-events: none;
-            border-radius: 3px;
+            transform: translateY(-6px) scale(0.98);
+            transform-origin: top right;
+            transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
         }
 
-        body.dark-mode .book-container::before {
-            background: 
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(255, 255, 255, 0.02) 2px,
-                    rgba(255, 255, 255, 0.02) 3px
-                );
+        .mobile-menu.open {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+
+        .mobile-menu a {
+            display: block;
+            text-decoration: none;
+            color: rgba(24, 29, 42, 0.95);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 9px 10px;
+            border-radius: 9px;
+        }
+
+        .mobile-menu a:hover {
+            background: rgba(255, 255, 255, 0.35);
+            color: #2d3168;
+        }
+
+        .page-wrapper {
+            width: 100%;
+            padding: 96px 16px 52px;
+        }
+
+        .book-container {
+            max-width: 980px;
+            margin: 0 auto;
+            position: relative;
         }
 
         .page-edge {
             position: absolute;
-            top: 0;
-            right: -5px;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(to right, 
-                rgba(139, 69, 19, 0.2),
-                rgba(139, 69, 19, 0.05)
-            );
-            transition: background 0.3s;
-        }
-
-        body.dark-mode .page-edge {
-            background: linear-gradient(to right, 
-                rgba(255, 255, 255, 0.15),
-                rgba(255, 255, 255, 0.03)
-            );
+            inset: 10px -8px -12px 18px;
+            border-radius: 28px;
+            background: linear-gradient(120deg, rgba(255,255,255,0.22), rgba(0,0,0,0.2));
+            filter: blur(1px);
+            z-index: 0;
         }
 
         .book-content {
-            padding: 80px 90px;
             position: relative;
+            z-index: 1;
+            background: var(--paper);
+            border: 1px solid var(--paper-line);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            padding: clamp(30px, 6vw, 68px);
+            overflow: hidden;
         }
-        
+
+        .book-content::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(to right, rgba(0,0,0,0.08) 0 2px, transparent 2px 100%),
+                repeating-linear-gradient(to bottom, transparent 0 40px, rgba(0,0,0,0.03) 40px 41px);
+            mix-blend-mode: multiply;
+            opacity: 0.35;
+        }
+
+        .title, .subtitle, .author, .chapter, .footer { position: relative; z-index: 1; }
+
         .title {
-            font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 56px;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            line-height: 1.05;
+            margin-bottom: 8px;
             text-align: center;
-            margin-bottom: 15px;
-            color: #2a1810;
-            font-weight: normal;
-            letter-spacing: 3px;
-            line-height: 1.3;
-            transition: color 0.3s;
         }
 
-        body.dark-mode .title {
-            color: #e8d5c4;
-        }
-        
         .subtitle {
-            font-family: 'Instrument Serif', Georgia, serif;
             text-align: center;
-            font-size: 20px;
-            color: #6d4c41;
-            margin-bottom: 40px;
-            font-style: italic;
-            letter-spacing: 1px;
-            transition: color 0.3s;
+            color: var(--ink-muted);
+            font-size: clamp(1.2rem, 3vw, 1.65rem);
+            margin-bottom: 10px;
         }
 
-        body.dark-mode .subtitle {
-            color: #b8a99a;
-        }
-        
         .author {
             text-align: center;
-            font-family: 'CMU Serif', serif;
-            font-size: 15px;
-            color: #8d6e63;
-            margin-bottom: 60px;
-            letter-spacing: 2px;
+            font-family: 'Inter', sans-serif;
             text-transform: uppercase;
-            transition: color 0.3s;
+            letter-spacing: 0.18em;
+            color: #8a654d;
+            font-size: 0.77rem;
+            margin-bottom: 38px;
         }
 
-        body.dark-mode .author {
-            color: #9a8a7a;
-        }
-
-        .page-number {
-            font-family: 'CMU Serif', serif;
-            text-align: center;
-            color: #a1887f;
-            font-size: 14px;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            transition: color 0.3s;
-        }
-
-        body.dark-mode .page-number {
-            color: #6d5d4d;
-        }
-        
         .chapter {
-            margin-bottom: 70px;
-            page-break-inside: avoid;
-        }
-        
-        .chapter-title {
-            font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 36px;
-            margin-bottom: 35px;
-            color: #3e2723;
-            text-align: center;
-            letter-spacing: 2px;
-            position: relative;
-            padding-bottom: 25px;
-            transition: color 0.3s;
+            margin-top: 36px;
+            background: rgba(255, 255, 255, 0.48);
+            border: 1px solid rgba(129, 98, 76, 0.2);
+            border-radius: 18px;
+            padding: 24px clamp(18px, 4vw, 34px) 22px;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 450ms ease, transform 450ms ease;
         }
 
-        body.dark-mode .chapter-title {
-            color: #d4c4b0;
+        .chapter.visible { opacity: 1; transform: translateY(0); }
+
+        .chapter-title {
+            margin-bottom: 16px;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            line-height: 1.2;
+            position: relative;
+            padding-bottom: 12px;
         }
-        
+
         .chapter-title::after {
             content: '';
             position: absolute;
+            left: 0;
             bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 120px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #8b4513, transparent);
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: center;
+            height: 2px;
+            width: 80px;
+            background: linear-gradient(to right, var(--accent), transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 500ms ease;
         }
 
-        .chapter-title.animated::after {
-            transform: translateX(-50%) scaleX(1);
-        }
+        .chapter-title.animated::after { transform: scaleX(1); }
 
-        body.dark-mode .chapter-title::after {
-            background: linear-gradient(90deg, transparent, #b8a99a, transparent);
-        }
-        
         .chapter-number {
             display: block;
-            font-size: 15px;
-            color: #8b4513;
-            margin-bottom: 12px;
-            letter-spacing: 4px;
-            font-weight: normal;
-            transition: color 0.3s;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.13em;
+            font-size: 0.75rem;
+            color: #8a654d;
+            margin-bottom: 7px;
         }
 
-        body.dark-mode .chapter-number {
-            color: #c9b8a8;
-        }
-        
-        .content p {
-            margin-bottom: 25px;
-            text-align: justify;
-            text-indent: 2.5em;
-            color: #2a1810;
-            hyphens: auto;
-            transition: color 0.3s;
-        }
+        .content p { margin-bottom: 14px; font-size: clamp(1.15rem, 2.2vw, 1.35rem); }
 
-        body.dark-mode .content p {
-            color: #d4c4b0;
-        }
-        
-        .content p:first-of-type::first-letter {
-            font-size: 68px;
-            line-height: 58px;
-            float: left;
-            margin: 8px 12px 0 0;
-            font-family: 'Instrument Serif', Georgia, serif;
-            color: #6d4c41;
-            transition: color 0.3s;
-        }
-
-        body.dark-mode .content p:first-of-type::first-letter {
-            color: #c9b8a8;
-        }
-        
         .dialogue {
             font-style: italic;
-        }
-        
-        .emphasis {
-            font-weight: bold;
-            color: #1a1a1a;
-            transition: color 0.3s;
+            color: #7d4427;
+            font-weight: 600;
         }
 
-        body.dark-mode .emphasis {
-            color: #f0e6d8;
-        }
-        
+        .emphasis { font-weight: 700; color: #5f3018; }
+
         .scene-break {
             text-align: center;
-            margin: 50px 0;
-            font-size: 20px;
-            color: #8b4513;
-            letter-spacing: 18px;
-            transition: color 0.3s;
+            margin: 28px 0;
+            letter-spacing: 0.4em;
+            color: #7f6655;
+            font-size: 1.2rem;
         }
 
-        body.dark-mode .scene-break {
-            color: #b8a99a;
-        }
-        
-        .thought {
-            font-style: italic;
-            color: #5d4037;
-            transition: color 0.3s;
-        }
-
-        body.dark-mode .thought {
-            color: #b8a99a;
-        }
-        
         .footer {
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 1px solid rgba(139, 69, 19, 0.2);
+            margin-top: 44px;
             text-align: center;
-            font-size: 14px;
-            color: #8d6e63;
-            transition: all 0.3s;
+            border-top: 1px dashed rgba(107, 81, 63, 0.4);
+            padding-top: 28px;
+            color: #6f5544;
         }
 
-        body.dark-mode .footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #9a8a7a;
+        body.dark-mode {
+            --bg: #0d1020;
+            --paper: rgba(20, 24, 33, 0.9);
+            --paper-line: rgba(220, 202, 171, 0.2);
+            --ink: #e8dccc;
+            --ink-muted: #c7b7a2;
+            --accent: #f1a96c;
+            --mood-1: #251a4a;
+            --mood-2: #2c3672;
+            --mood-3: #0b1028;
+            --nav-tint: #2c3672;
         }
-        
-        @media (max-width: 768px) {
-            .navbar-content {
-                padding: 0 20px;
-            }
 
-            .navbar-title {
-                font-size: 22px;
-            }
+        body.dark-mode .navbar {
+            border-color: color-mix(in srgb, var(--nav-tint) 50%, rgba(255, 231, 204, 0.25));
+            box-shadow:
+                0 14px 34px rgba(0, 0, 0, 0.46),
+                inset 0 1px 0 rgba(255, 255, 255, 0.18),
+                inset 0 -10px 20px rgba(0, 0, 0, 0.22);
+        }
 
-            .navbar-links {
-                gap: 15px;
-            }
+        body.dark-mode .navbar::before {
+            opacity: 0.38;
+        }
 
-            .navbar-links a {
-                font-size: 14px;
-            }
+        body.dark-mode .navbar::after {
+            opacity: 0.52;
+        }
 
-            .book-content {
-                padding: 50px 35px;
-            }
-            
-            .title {
-                font-size: 38px;
-            }
-            
-            .subtitle {
-                font-size: 17px;
-            }
-            
-            .chapter-title {
-                font-size: 28px;
-            }
-            
-            body {
-                font-size: 17px;
+        body.dark-mode .navbar-title,
+        body.dark-mode .navbar-links a {
+            color: rgba(243, 233, 218, 0.94);
+        }
+
+        body.dark-mode .navbar-links a:hover {
+            color: #ffd8af;
+        }
+
+        body.dark-mode .theme-toggle svg {
+            stroke: #ffe0c0;
+        }
+
+        body.dark-mode .menu-toggle .bar {
+            background: #ffe0c0;
+        }
+
+        body.dark-mode .mobile-menu a {
+            color: rgba(243, 233, 218, 0.94);
+        }
+
+        body.dark-mode .mobile-menu a:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffd8af;
+        }
+
+        body.dark-mode .book-content::before { opacity: 0.18; mix-blend-mode: screen; }
+        body.dark-mode .chapter { background: rgba(38, 43, 56, 0.55); border-color: rgba(227, 203, 174, 0.24); }
+        body.dark-mode .dialogue { color: #f8b98b; }
+        body.dark-mode .emphasis { color: #ffcda2; }
+
+        @media (min-width: 901px) {
+            .mobile-menu {
+                display: none !important;
             }
         }
+
+        @media (max-width: 900px) {
+            .navbar-content { justify-content: space-between; }
+            .navbar-title { font-size: 0.82rem; letter-spacing: 0.12em; }
+        }
+
+        @media (max-width: 900px) {
+            .page-wrapper { padding-top: 94px; }
+            .navbar { top: 8px; width: calc(100% - 16px); }
+            .mobile-menu { top: 58px; right: 8px; min-width: 200px; }
+            .navbar-content { padding: 7px 12px; gap: 8px; }
+            .navbar-title { font-size: 0.74rem; letter-spacing: 0.09em; }
+            .navbar-links a { display: none; }
+            .menu-toggle { display: inline-flex; }
+            .theme-toggle, .menu-toggle { width: 34px; height: 34px; }
+            .theme-toggle svg { width: 16px; height: 16px; }
+            .content p { line-height: 1.75; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .navbar::before,
+            .navbar::after {
+                animation: none;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -569,8 +496,13 @@
         <div class="navbar-content">
             <div class="navbar-title">Illusion of Tomorrow</div>
             <div class="navbar-links">
-                <a href="https://enochkofficial.github.io/EnochKOfficialWebPortfolio/" target="_blank">Enoch's Portfolio</a>
-                <a href="https://enochkofficial.github.io/InterochTheory/" target="_blank">Interoch Theory</a>
+                <a href="https://enochkofficial.github.io/EnochKOfficialWebPortfolio/" target="_blank" rel="noopener noreferrer">Enoch's Portfolio</a>
+                <a href="https://enochkofficial.github.io/InterochTheory/" target="_blank" rel="noopener noreferrer">Interoch Theory</a>
+                <button class="menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMobileMenu()">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
                 <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
                     <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -591,13 +523,18 @@
         </div>
     </nav>
 
+    <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+        <a href="https://enochkofficial.github.io/EnochKOfficialWebPortfolio/" target="_blank" rel="noopener noreferrer">Enoch's Portfolio</a>
+        <a href="https://enochkofficial.github.io/InterochTheory/" target="_blank" rel="noopener noreferrer">Interoch Theory</a>
+    </div>
+
     <div class="page-wrapper">
         <div class="book-container">
             <div class="page-edge"></div>
             <div class="book-content">
                 <h1 class="title">Illusion of Tomorrow</h1>
                 <p class="subtitle">A Story of Time, Love, and the Paradoxes That Bind Us</p>
-                <p class="author">By Anonymous</p>
+                <p class="author">By Enoch K</p>
 
                 <div id="chapter1" class="chapter">
                     <h2 class="chapter-title">
@@ -1381,153 +1318,220 @@
     </div>
 
     <script>
-        // Chapter moods mapped to their IDs - defines emotional tone for each section
-        const chapterMoods = {
-            'chapter1': 'hope',       // The Year of Desolation - but with hope
-            'chapter2': 'hope',       // The Announcement
-            'chapter3': 'despair',    // The Dinner - rejection
-            'chapter4': 'despair',    // The Disorder
-            'chapter5': 'tragedy',    // The Final Goodbye
-            'chapter6': 'tragedy',    // The Radio - Georgia's death
-            'chapter7': 'tragedy',    // The Second Tragedy
-            'chapter8': 'revelation', // The Dream - travel back
-            'chapter9': 'hope',       // Twenty Years of Obsession
-            'chapter10': 'cosmic',    // The Dreams of Purple
-            'chapter11': 'cosmic',    // The Mockery
-            'chapter12': 'revelation',// The Invention
-            'chapter13': 'despair',   // The Terrible Mistake
-            'chapter14': 'revelation',// The Realization
-            'chapter15': 'cosmic',    // The Stem Project on Mars
-            'chapter16': 'cosmic',    // Area 51
-            'chapter17': 'sacrifice', // The Decision
-            'chapter18': 'sacrifice', // Kaelim
-            'chapter19': 'sacrifice', // The Confrontation
-            'chapter20': 'cosmic',    // The Ultimate Choice
-            'epilogue': 'peace'       // The New Dawn
+
+        const chapterMoodSequence = [
+            'hope','hope','despair','despair','tragedy','tragedy','tragedy','revelation','hope','cosmic',
+            'cosmic','revelation','despair','revelation','cosmic','cosmic','sacrifice','sacrifice','sacrifice','cosmic','peace'
+        ];
+
+        const moodGradients = {
+            light: {
+                hope: ['#d4f0dd', '#a7dcb8', '#6ea987'],
+                despair: ['#ead7ef', '#c6a8d8', '#9375b0'],
+                tragedy: ['#f6d2d8', '#d696a7', '#a56478'],
+                revelation: ['#d9e3ff', '#a7bbff', '#708fd8'],
+                cosmic: ['#c9ddff', '#8baef6', '#5776cc'],
+                sacrifice: ['#ead8ff', '#be9be8', '#8766b9'],
+                peace: ['#cfeff1', '#9fd7df', '#62aebd']
+            },
+            dark: {
+                hope: ['#173a2f', '#215d47', '#0f251d'],
+                despair: ['#301b3b', '#4a2a59', '#1a1021'],
+                tragedy: ['#3a1b2d', '#5b2b44', '#200f1a'],
+                revelation: ['#1a2551', '#2f3f84', '#0c1530'],
+                cosmic: ['#0d1c48', '#1c3480', '#070e26'],
+                sacrifice: ['#2d1947', '#472870', '#160b24'],
+                peace: ['#12364a', '#1f5672', '#0c1f2c']
+            }
         };
 
-        // Dark mode toggle functionality with icon switching
+        let chapterElements = [];
+        let scrollFrame;
+
         function toggleTheme() {
             const body = document.body;
             const sunIcon = document.querySelector('.sun-icon');
             const moonIcon = document.querySelector('.moon-icon');
-            
+
             body.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                sunIcon.style.display = 'none';
-                moonIcon.style.display = 'block';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                sunIcon.style.display = 'block';
-                moonIcon.style.display = 'none';
-                localStorage.setItem('theme', 'light');
-            }
+            const darkEnabled = body.classList.contains('dark-mode');
+            sunIcon.style.display = darkEnabled ? 'none' : 'block';
+            moonIcon.style.display = darkEnabled ? 'block' : 'none';
+            localStorage.setItem('theme', darkEnabled ? 'dark' : 'light');
+            updateBackgroundMood();
         }
 
-        // Apply mood-based background based on scroll position
+        function setMoodGradient(mood) {
+            const mode = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+            const palette = moodGradients[mode];
+            const [c1, c2, c3] = palette[mood] || palette.peace;
+            document.body.style.setProperty('--mood-1', c1);
+            document.body.style.setProperty('--mood-2', c2);
+            document.body.style.setProperty('--mood-3', c3);
+            document.body.style.setProperty('--nav-tint', c2);
+        }
+
+        function assignChapterIds() {
+            chapterElements = Array.from(document.querySelectorAll('.chapter'));
+            chapterElements.forEach((chapter, index) => {
+                const label = chapter.querySelector('.chapter-number')?.textContent?.trim().toLowerCase() || '';
+                const generatedId = label.includes('epilogue') ? 'epilogue' : `chapter${index + 1}`;
+                chapter.id = generatedId;
+                chapter.dataset.mood = chapterMoodSequence[index] || 'peace';
+            });
+        }
+
         function updateBackgroundMood() {
-            const scrollPosition = window.scrollY + window.innerHeight / 2;
-            let currentMood = null;
+            const marker = window.scrollY + window.innerHeight * 0.45;
+            let activeMood = chapterElements[0]?.dataset.mood;
 
-            // Find which chapter is currently in view
-            for (const [chapterId, mood] of Object.entries(chapterMoods)) {
-                const element = document.getElementById(chapterId) || 
-                               document.querySelector(`[id="${chapterId}"]`) ||
-                               document.querySelector(`.chapter:has(.${chapterId})`);
-                
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    const elementTop = rect.top + window.scrollY;
-                    const elementBottom = elementTop + rect.height;
-
-                    if (scrollPosition >= elementTop && scrollPosition <= elementBottom) {
-                        currentMood = mood;
-                        break;
-                    }
+            chapterElements.forEach((chapter) => {
+                const top = chapter.offsetTop;
+                const bottom = top + chapter.offsetHeight;
+                if (marker >= top && marker < bottom) {
+                    activeMood = chapter.dataset.mood;
                 }
-            }
+            });
 
-            // Remove all mood classes
-            document.body.classList.remove('mood-hope', 'mood-love', 'mood-despair', 
-                'mood-tragedy', 'mood-revelation', 'mood-cosmic', 'mood-sacrifice', 'mood-peace');
-            
-            // Add current mood class if found
-            if (currentMood) {
-                document.body.classList.add(`mood-${currentMood}`);
+            if (activeMood) {
+                setMoodGradient(activeMood);
             }
         }
 
-        // Animate chapter title underlines when they come into view
         function animateChapterTitles() {
-            const titles = document.querySelectorAll('.chapter-title');
-            
-            titles.forEach(title => {
-                const rect = title.getBoundingClientRect();
-                const isVisible = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
-                
-                if (isVisible && !title.classList.contains('animated')) {
+            document.querySelectorAll('.chapter-title').forEach((title) => {
+                const chapter = title.closest('.chapter');
+                if (chapter?.classList.contains('visible')) {
                     title.classList.add('animated');
                 }
             });
         }
 
-        // Scroll event handler with throttling for performance
-        let scrollTimeout;
         function handleScroll() {
-            if (scrollTimeout) {
-                window.cancelAnimationFrame(scrollTimeout);
-            }
-            
-            scrollTimeout = window.requestAnimationFrame(() => {
+            if (scrollFrame) cancelAnimationFrame(scrollFrame);
+            scrollFrame = requestAnimationFrame(() => {
                 updateBackgroundMood();
                 animateChapterTitles();
             });
         }
 
-        // Load saved theme and initialize animations on page load
+
+        function toggleMobileMenu(forceState) {
+            const menu = document.getElementById('mobile-menu');
+            const menuButton = document.querySelector('.menu-toggle');
+            if (!menu || !menuButton) return;
+
+            const shouldOpen = typeof forceState === 'boolean' ? forceState : !menu.classList.contains('open');
+
+            if (shouldOpen) {
+                const rect = menuButton.getBoundingClientRect();
+                menu.style.top = `${Math.round(rect.bottom + 8)}px`;
+                menu.style.left = `${Math.round(Math.max(8, rect.right - Math.max(200, menu.offsetWidth || 210)))}px`;
+                menu.style.right = 'auto';
+            }
+
+            menu.classList.toggle('open', shouldOpen);
+            menuButton.setAttribute('aria-expanded', String(shouldOpen));
+            menu.setAttribute('aria-hidden', String(!shouldOpen));
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme');
+            const body = document.body;
             const sunIcon = document.querySelector('.sun-icon');
             const moonIcon = document.querySelector('.moon-icon');
             const navbar = document.querySelector('.navbar');
-            
-            // Apply saved theme
+            const menuButton = document.querySelector('.menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const NAVBAR_IDLE_DELAY = 2200;
+            let navbarIdleTimer;
+
+            assignChapterIds();
+
+            if (menuButton && mobileMenu) {
+                mobileMenu.querySelectorAll('a').forEach((link) => {
+                    link.addEventListener('click', () => toggleMobileMenu(false));
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!navbar.contains(event.target) && !mobileMenu.contains(event.target)) {
+                        toggleMobileMenu(false);
+                    }
+                });
+
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth > 900) {
+                        toggleMobileMenu(false);
+                        return;
+                    }
+
+                    if (mobileMenu.classList.contains('open')) {
+                        toggleMobileMenu(true);
+                    }
+                });
+            }
+
+            const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
+                body.classList.add('dark-mode');
                 sunIcon.style.display = 'none';
                 moonIcon.style.display = 'block';
             }
 
-            // Animate navbar sliding down
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+            chapterElements.forEach((chapter) => observer.observe(chapter));
+
+            const hideNavbar = () => {
+                if (navbar.classList.contains('loaded')) {
+                    navbar.classList.add('hidden');
+                }
+            };
+
+            const resetNavbarIdleTimer = () => {
+                navbar.classList.remove('hidden');
+                clearTimeout(navbarIdleTimer);
+                navbarIdleTimer = setTimeout(hideNavbar, NAVBAR_IDLE_DELAY);
+            };
+
             setTimeout(() => {
                 navbar.classList.add('loaded');
-            }, 100);
+                resetNavbarIdleTimer();
+            }, 120);
 
-            // Initialize scroll-based features
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            ['pointermove', 'touchstart', 'keydown', 'wheel', 'scroll'].forEach((eventName) => {
+                window.addEventListener(eventName, resetNavbarIdleTimer, { passive: true });
+            });
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    hideNavbar();
+                } else {
+                    resetNavbarIdleTimer();
+                }
+            });
+
             updateBackgroundMood();
             animateChapterTitles();
-
-            // Add scroll listener
-            window.addEventListener('scroll', handleScroll, { passive: true });
-
-            // Trigger initial animation for visible chapters
-            setTimeout(animateChapterTitles, 500);
+            setTimeout(() => chapterElements.forEach(ch => ch.classList.add('visible')), 500);
         });
 
-        // Add smooth scroll behavior for better UX
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
+
     </script>
 </body>
 </html>
