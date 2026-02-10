@@ -5,563 +5,293 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Illusion of Tomorrow - A Story of Time, Love, and Sacrifice</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap');
-        
-        @font-face {
-            font-family: 'CMU Serif';
-            src: url('https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts/CMUSerif-Roman.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
+
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+        :root {
+            --bg: #101725;
+            --bg-soft: #1b2640;
+            --paper: rgba(252, 247, 240, 0.92);
+            --paper-line: rgba(90, 64, 45, 0.24);
+            --ink: #2b1d14;
+            --ink-muted: #6f5544;
+            --accent: #c77d3f;
+            --shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
         }
-        
-        @font-face {
-            font-family: 'CMU Serif';
-            src: url('https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts/CMUSerif-Italic.woff2') format('woff2');
-            font-weight: normal;
-            font-style: italic;
-        }
-        
-        @font-face {
-            font-family: 'CMU Serif';
-            src: url('https://cdn.jsdelivr.net/gh/aaaakshat/cm-web-fonts@latest/fonts/CMUSerif-Bold.woff2') format('woff2');
-            font-weight: bold;
-            font-style: normal;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
-        
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
         body {
-            font-family: 'CMU Serif', Georgia, serif;
-            background: #2b2520;
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(0,0,0,0.15) 0px,
-                    transparent 1px,
-                    transparent 2px,
-                    rgba(0,0,0,0.15) 3px
-                ),
-                linear-gradient(135deg, #3e2723 0%, #4e342e 50%, #5d4037 100%);
-            color: #2a1810;
-            line-height: 1.85;
-            font-size: 19px;
-            transition: background 1.5s ease, color 0.3s;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            line-height: 1.9;
+            color: var(--ink);
+            background:
+                radial-gradient(circle at 15% 20%, #26365b 0%, transparent 30%),
+                radial-gradient(circle at 85% 10%, #452d57 0%, transparent 35%),
+                linear-gradient(160deg, var(--bg) 0%, #141d2f 40%, #0b111d 100%);
+            min-height: 100vh;
+            transition: background 500ms ease, color 300ms ease;
         }
 
-        body.dark-mode {
-            background: #0d0d0d;
-            background-image: 
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(255,255,255,0.02) 0px,
-                    transparent 1px,
-                    transparent 2px,
-                    rgba(255,255,255,0.02) 3px
-                ),
-                linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 50%, #000000 100%);
-        }
 
-        /* Story mood backgrounds - Light mode */
-        body.mood-hope {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 50%, #a5d6a7 100%);
-        }
-
-        body.mood-love {
-            background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 50%, #f48fb1 100%);
-        }
-
-        body.mood-despair {
-            background: linear-gradient(135deg, #37474f 0%, #455a64 50%, #546e7a 100%);
-        }
-
-        body.mood-tragedy {
-            background: linear-gradient(135deg, #263238 0%, #37474f 50%, #455a64 100%);
-        }
-
-        body.mood-revelation {
-            background: linear-gradient(135deg, #e1bee7 0%, #ce93d8 50%, #ba68c8 100%);
-        }
-
-        body.mood-cosmic {
-            background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
-        }
-
-        body.mood-sacrifice {
-            background: linear-gradient(135deg, #4a148c 0%, #6a1b9a 50%, #7b1fa2 100%);
-        }
-
-        body.mood-peace {
-            background: linear-gradient(135deg, #b3e5fc 0%, #81d4fa 50%, #4fc3f7 100%);
-        }
-
-        /* Story mood backgrounds - Dark mode */
-        body.dark-mode.mood-hope {
-            background: linear-gradient(135deg, #1b3a1f 0%, #2e5533 50%, #3a6b3f 100%);
-        }
-
-        body.dark-mode.mood-love {
-            background: linear-gradient(135deg, #3d1a2b 0%, #5c2a40 50%, #7a3954 100%);
-        }
-
-        body.dark-mode.mood-despair {
-            background: linear-gradient(135deg, #0d1214 0%, #1a1f23 50%, #252c31 100%);
-        }
-
-        body.dark-mode.mood-tragedy {
-            background: linear-gradient(135deg, #0a0a0a 0%, #151515 50%, #1f1f1f 100%);
-        }
-
-        body.dark-mode.mood-revelation {
-            background: linear-gradient(135deg, #2d1b33 0%, #3f2847 50%, #51355b 100%);
-        }
-
-        body.dark-mode.mood-cosmic {
-            background: linear-gradient(135deg, #0a0e1f 0%, #151b33 50%, #1f2847 100%);
-        }
-
-        body.dark-mode.mood-sacrifice {
-            background: linear-gradient(135deg, #1a0a26 0%, #2a1539 50%, #3a1f4d 100%);
-        }
-
-        body.dark-mode.mood-peace {
-            background: linear-gradient(135deg, #1a2633 0%, #25374a 50%, #304861 100%);
-        }
-
+        body.mood-hope { background: linear-gradient(160deg, #1f3a45 0%, #224e55 42%, #172a32 100%); }
+        body.mood-despair { background: linear-gradient(160deg, #2b1f2f 0%, #311c2a 45%, #1b1420 100%); }
+        body.mood-tragedy { background: linear-gradient(160deg, #3c1f27 0%, #2a1b33 45%, #121422 100%); }
+        body.mood-revelation { background: linear-gradient(160deg, #1c2755 0%, #312a6a 45%, #10163a 100%); }
+        body.mood-cosmic { background: linear-gradient(160deg, #0b1a3a 0%, #192a5f 45%, #090f27 100%); }
+        body.mood-sacrifice { background: linear-gradient(160deg, #351d49 0%, #4b2655 45%, #1c1028 100%); }
+        body.mood-peace { background: linear-gradient(160deg, #1d3a4c 0%, #2c5d72 45%, #132533 100%); }
         .navbar {
             position: fixed;
-            top: 20px;
+            top: 18px;
             left: 50%;
-            transform: translateX(-50%) translateY(-100px);
-            background: rgba(255, 248, 240, 0.85);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border: 1px solid rgba(139, 69, 19, 0.2);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            transform: translateX(-50%) translateY(-130px);
+            width: min(940px, calc(100% - 24px));
+            border-radius: 999px;
+            background: rgba(11, 18, 32, 0.78);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             z-index: 1000;
-            padding: 18px 35px;
-            border-radius: 50px;
-            max-width: 700px;
-            width: calc(100% - 40px);
             opacity: 0;
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 450ms ease, opacity 350ms ease;
         }
 
-        .navbar.loaded {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
-        body.dark-mode .navbar {
-            background: rgba(20, 20, 20, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-        }
+        .navbar.loaded { transform: translateX(-50%) translateY(0); opacity: 1; }
+        .navbar.loaded.hidden { transform: translateX(-50%) translateY(-145px); opacity: 0; pointer-events: none; }
 
         .navbar-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 14px;
+            padding: 10px 20px;
         }
 
         .navbar-title {
-            font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 22px;
-            color: #3e2723;
-            letter-spacing: 1px;
-            transition: color 0.3s;
+            font-family: 'Inter', sans-serif;
+            color: #f4e8d8;
+            font-size: 0.95rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            white-space: nowrap;
         }
 
-        body.dark-mode .navbar-title {
-            color: #e8d5c4;
-        }
-
-        .navbar-links {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
+        .navbar-links { display: flex; align-items: center; gap: 14px; }
 
         .navbar-links a {
-            font-family: 'CMU Serif', serif;
-            color: #5d4037;
             text-decoration: none;
-            font-size: 14px;
-            transition: color 0.3s;
-            letter-spacing: 0.5px;
+            color: rgba(244, 232, 216, 0.95);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+            transition: color 250ms ease, transform 250ms ease;
         }
 
-        body.dark-mode .navbar-links a {
-            color: #b8a99a;
-        }
-
-        .navbar-links a:hover {
-            color: #8b4513;
-        }
-
-        body.dark-mode .navbar-links a:hover {
-            color: #d4c4b0;
-        }
+        .navbar-links a:hover { color: #ffd4a8; transform: translateY(-1px); }
 
         .theme-toggle {
-            background: none;
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 999px;
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
             cursor: pointer;
-            padding: 8px;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .theme-toggle svg {
-            width: 22px;
-            height: 22px;
-            stroke: #5d4037;
-            fill: none;
+            width: 19px;
+            height: 19px;
+            stroke: #ffe2bf;
             stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-            transition: all 0.3s;
+            fill: none;
+            transition: transform 300ms ease;
         }
 
-        body.dark-mode .theme-toggle svg {
-            stroke: #b8a99a;
-        }
+        .theme-toggle:hover svg { transform: rotate(15deg) scale(1.08); }
 
-        .theme-toggle:hover svg {
-            stroke: #8b4513;
-            transform: rotate(20deg);
-        }
-
-        body.dark-mode .theme-toggle:hover svg {
-            stroke: #d4c4b0;
-        }
-        
         .page-wrapper {
-            min-height: 100vh;
-            padding: 120px 20px 60px;
+            width: 100%;
+            padding: 96px 16px 52px;
         }
-        
+
         .book-container {
-            max-width: 850px;
+            max-width: 980px;
             margin: 0 auto;
-            background: linear-gradient(to bottom, #faf8f3 0%, #f5f1e8 100%);
-            box-shadow: 
-                0 0 0 1px rgba(139, 69, 19, 0.1),
-                0 2px 4px rgba(0,0,0,0.1),
-                0 8px 16px rgba(0,0,0,0.1),
-                0 16px 32px rgba(0,0,0,0.1),
-                inset 0 0 100px rgba(139, 69, 19, 0.02);
-            border-radius: 3px;
             position: relative;
-            transition: all 0.3s;
-        }
-
-        body.dark-mode .book-container {
-            background: linear-gradient(to bottom, #1a1a1a 0%, #0d0d0d 100%);
-            box-shadow: 
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                0 2px 4px rgba(0,0,0,0.3),
-                0 8px 16px rgba(0,0,0,0.3),
-                0 16px 32px rgba(0,0,0,0.3),
-                inset 0 0 100px rgba(255, 255, 255, 0.02);
-        }
-
-        .book-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(139, 69, 19, 0.03) 2px,
-                    rgba(139, 69, 19, 0.03) 3px
-                );
-            pointer-events: none;
-            border-radius: 3px;
-        }
-
-        body.dark-mode .book-container::before {
-            background: 
-                repeating-linear-gradient(
-                    90deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(255, 255, 255, 0.02) 2px,
-                    rgba(255, 255, 255, 0.02) 3px
-                );
         }
 
         .page-edge {
             position: absolute;
-            top: 0;
-            right: -5px;
-            width: 5px;
-            height: 100%;
-            background: linear-gradient(to right, 
-                rgba(139, 69, 19, 0.2),
-                rgba(139, 69, 19, 0.05)
-            );
-            transition: background 0.3s;
-        }
-
-        body.dark-mode .page-edge {
-            background: linear-gradient(to right, 
-                rgba(255, 255, 255, 0.15),
-                rgba(255, 255, 255, 0.03)
-            );
+            inset: 10px -8px -12px 18px;
+            border-radius: 28px;
+            background: linear-gradient(120deg, rgba(255,255,255,0.22), rgba(0,0,0,0.2));
+            filter: blur(1px);
+            z-index: 0;
         }
 
         .book-content {
-            padding: 80px 90px;
             position: relative;
+            z-index: 1;
+            background: var(--paper);
+            border: 1px solid var(--paper-line);
+            border-radius: 24px;
+            box-shadow: var(--shadow);
+            padding: clamp(30px, 6vw, 68px);
+            overflow: hidden;
         }
-        
+
+        .book-content::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background:
+                linear-gradient(to right, rgba(0,0,0,0.08) 0 2px, transparent 2px 100%),
+                repeating-linear-gradient(to bottom, transparent 0 40px, rgba(0,0,0,0.03) 40px 41px);
+            mix-blend-mode: multiply;
+            opacity: 0.35;
+        }
+
+        .title, .subtitle, .author, .chapter, .footer { position: relative; z-index: 1; }
+
         .title {
-            font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 56px;
+            font-size: clamp(2.2rem, 6vw, 4rem);
+            line-height: 1.05;
+            margin-bottom: 8px;
             text-align: center;
-            margin-bottom: 15px;
-            color: #2a1810;
-            font-weight: normal;
-            letter-spacing: 3px;
-            line-height: 1.3;
-            transition: color 0.3s;
         }
 
-        body.dark-mode .title {
-            color: #e8d5c4;
-        }
-        
         .subtitle {
-            font-family: 'Instrument Serif', Georgia, serif;
             text-align: center;
-            font-size: 20px;
-            color: #6d4c41;
-            margin-bottom: 40px;
-            font-style: italic;
-            letter-spacing: 1px;
-            transition: color 0.3s;
+            color: var(--ink-muted);
+            font-size: clamp(1.2rem, 3vw, 1.65rem);
+            margin-bottom: 10px;
         }
 
-        body.dark-mode .subtitle {
-            color: #b8a99a;
-        }
-        
         .author {
             text-align: center;
-            font-family: 'CMU Serif', serif;
-            font-size: 15px;
-            color: #8d6e63;
-            margin-bottom: 60px;
-            letter-spacing: 2px;
+            font-family: 'Inter', sans-serif;
             text-transform: uppercase;
-            transition: color 0.3s;
+            letter-spacing: 0.18em;
+            color: #8a654d;
+            font-size: 0.77rem;
+            margin-bottom: 38px;
         }
 
-        body.dark-mode .author {
-            color: #9a8a7a;
-        }
-
-        .page-number {
-            font-family: 'CMU Serif', serif;
-            text-align: center;
-            color: #a1887f;
-            font-size: 14px;
-            margin-top: 50px;
-            margin-bottom: 30px;
-            transition: color 0.3s;
-        }
-
-        body.dark-mode .page-number {
-            color: #6d5d4d;
-        }
-        
         .chapter {
-            margin-bottom: 70px;
-            page-break-inside: avoid;
-        }
-        
-        .chapter-title {
-            font-family: 'Instrument Serif', Georgia, serif;
-            font-size: 36px;
-            margin-bottom: 35px;
-            color: #3e2723;
-            text-align: center;
-            letter-spacing: 2px;
-            position: relative;
-            padding-bottom: 25px;
-            transition: color 0.3s;
+            margin-top: 36px;
+            background: rgba(255, 255, 255, 0.48);
+            border: 1px solid rgba(129, 98, 76, 0.2);
+            border-radius: 18px;
+            padding: 24px clamp(18px, 4vw, 34px) 22px;
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 450ms ease, transform 450ms ease;
         }
 
-        body.dark-mode .chapter-title {
-            color: #d4c4b0;
+        .chapter.visible { opacity: 1; transform: translateY(0); }
+
+        .chapter-title {
+            margin-bottom: 16px;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            line-height: 1.2;
+            position: relative;
+            padding-bottom: 12px;
         }
-        
+
         .chapter-title::after {
             content: '';
             position: absolute;
+            left: 0;
             bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 120px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #8b4513, transparent);
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: center;
+            height: 2px;
+            width: 80px;
+            background: linear-gradient(to right, var(--accent), transparent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 500ms ease;
         }
 
-        .chapter-title.animated::after {
-            transform: translateX(-50%) scaleX(1);
-        }
+        .chapter-title.animated::after { transform: scaleX(1); }
 
-        body.dark-mode .chapter-title::after {
-            background: linear-gradient(90deg, transparent, #b8a99a, transparent);
-        }
-        
         .chapter-number {
             display: block;
-            font-size: 15px;
-            color: #8b4513;
-            margin-bottom: 12px;
-            letter-spacing: 4px;
-            font-weight: normal;
-            transition: color 0.3s;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.13em;
+            font-size: 0.75rem;
+            color: #8a654d;
+            margin-bottom: 7px;
         }
 
-        body.dark-mode .chapter-number {
-            color: #c9b8a8;
-        }
-        
-        .content p {
-            margin-bottom: 25px;
-            text-align: justify;
-            text-indent: 2.5em;
-            color: #2a1810;
-            hyphens: auto;
-            transition: color 0.3s;
-        }
+        .content p { margin-bottom: 14px; font-size: clamp(1.15rem, 2.2vw, 1.35rem); }
 
-        body.dark-mode .content p {
-            color: #d4c4b0;
-        }
-        
-        .content p:first-of-type::first-letter {
-            font-size: 68px;
-            line-height: 58px;
-            float: left;
-            margin: 8px 12px 0 0;
-            font-family: 'Instrument Serif', Georgia, serif;
-            color: #6d4c41;
-            transition: color 0.3s;
-        }
-
-        body.dark-mode .content p:first-of-type::first-letter {
-            color: #c9b8a8;
-        }
-        
         .dialogue {
             font-style: italic;
-        }
-        
-        .emphasis {
-            font-weight: bold;
-            color: #1a1a1a;
-            transition: color 0.3s;
+            color: #7d4427;
+            font-weight: 600;
         }
 
-        body.dark-mode .emphasis {
-            color: #f0e6d8;
-        }
-        
+        .emphasis { font-weight: 700; color: #5f3018; }
+
         .scene-break {
             text-align: center;
-            margin: 50px 0;
-            font-size: 20px;
-            color: #8b4513;
-            letter-spacing: 18px;
-            transition: color 0.3s;
+            margin: 28px 0;
+            letter-spacing: 0.4em;
+            color: #7f6655;
+            font-size: 1.2rem;
         }
 
-        body.dark-mode .scene-break {
-            color: #b8a99a;
-        }
-        
-        .thought {
-            font-style: italic;
-            color: #5d4037;
-            transition: color 0.3s;
-        }
-
-        body.dark-mode .thought {
-            color: #b8a99a;
-        }
-        
         .footer {
-            margin-top: 80px;
-            padding-top: 40px;
-            border-top: 1px solid rgba(139, 69, 19, 0.2);
+            margin-top: 44px;
             text-align: center;
-            font-size: 14px;
-            color: #8d6e63;
-            transition: all 0.3s;
+            border-top: 1px dashed rgba(107, 81, 63, 0.4);
+            padding-top: 28px;
+            color: #6f5544;
         }
 
-        body.dark-mode .footer {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #9a8a7a;
+        body.dark-mode {
+            --paper: rgba(20, 24, 33, 0.9);
+            --paper-line: rgba(220, 202, 171, 0.2);
+            --ink: #e8dccc;
+            --ink-muted: #c7b7a2;
+            --accent: #f1a96c;
+            background:
+                radial-gradient(circle at 15% 20%, #281f46 0%, transparent 30%),
+                radial-gradient(circle at 85% 10%, #12365e 0%, transparent 35%),
+                linear-gradient(160deg, #0a1020 0%, #091223 45%, #050a12 100%);
         }
-        
-        @media (max-width: 768px) {
-            .navbar-content {
-                padding: 0 20px;
-            }
 
-            .navbar-title {
-                font-size: 22px;
-            }
-
-            .navbar-links {
-                gap: 15px;
-            }
-
-            .navbar-links a {
-                font-size: 14px;
-            }
-
-            .book-content {
-                padding: 50px 35px;
-            }
-            
-            .title {
-                font-size: 38px;
-            }
-            
-            .subtitle {
-                font-size: 17px;
-            }
-            
-            .chapter-title {
-                font-size: 28px;
-            }
-            
-            body {
-                font-size: 17px;
-            }
+        body.dark-mode .navbar {
+            background: rgba(12, 16, 27, 0.85);
+            border-color: rgba(255, 231, 204, 0.25);
         }
+
+        body.dark-mode .book-content::before { opacity: 0.18; mix-blend-mode: screen; }
+        body.dark-mode .chapter { background: rgba(38, 43, 56, 0.55); border-color: rgba(227, 203, 174, 0.24); }
+        body.dark-mode .dialogue { color: #f8b98b; }
+        body.dark-mode .emphasis { color: #ffcda2; }
+
+        @media (max-width: 900px) {
+            .navbar-content { flex-wrap: wrap; justify-content: center; }
+            .navbar-title { width: 100%; text-align: center; }
+        }
+
+        @media (max-width: 700px) {
+            .page-wrapper { padding-top: 116px; }
+            .navbar { top: 10px; }
+            .navbar-links { gap: 10px; flex-wrap: wrap; justify-content: center; }
+            .navbar-links a { font-size: 0.68rem; }
+            .content p { line-height: 1.75; }
+        }
+
     </style>
 </head>
 <body>
@@ -597,7 +327,7 @@
             <div class="book-content">
                 <h1 class="title">Illusion of Tomorrow</h1>
                 <p class="subtitle">A Story of Time, Love, and the Paradoxes That Bind Us</p>
-                <p class="author">By Anonymous</p>
+                <p class="author">By Enoch K</p>
 
                 <div id="chapter1" class="chapter">
                     <h2 class="chapter-title">
@@ -1381,153 +1111,150 @@
     </div>
 
     <script>
-        // Chapter moods mapped to their IDs - defines emotional tone for each section
-        const chapterMoods = {
-            'chapter1': 'hope',       // The Year of Desolation - but with hope
-            'chapter2': 'hope',       // The Announcement
-            'chapter3': 'despair',    // The Dinner - rejection
-            'chapter4': 'despair',    // The Disorder
-            'chapter5': 'tragedy',    // The Final Goodbye
-            'chapter6': 'tragedy',    // The Radio - Georgia's death
-            'chapter7': 'tragedy',    // The Second Tragedy
-            'chapter8': 'revelation', // The Dream - travel back
-            'chapter9': 'hope',       // Twenty Years of Obsession
-            'chapter10': 'cosmic',    // The Dreams of Purple
-            'chapter11': 'cosmic',    // The Mockery
-            'chapter12': 'revelation',// The Invention
-            'chapter13': 'despair',   // The Terrible Mistake
-            'chapter14': 'revelation',// The Realization
-            'chapter15': 'cosmic',    // The Stem Project on Mars
-            'chapter16': 'cosmic',    // Area 51
-            'chapter17': 'sacrifice', // The Decision
-            'chapter18': 'sacrifice', // Kaelim
-            'chapter19': 'sacrifice', // The Confrontation
-            'chapter20': 'cosmic',    // The Ultimate Choice
-            'epilogue': 'peace'       // The New Dawn
-        };
 
-        // Dark mode toggle functionality with icon switching
+        const chapterMoodSequence = [
+            'hope','hope','despair','despair','tragedy','tragedy','tragedy','revelation','hope','cosmic',
+            'cosmic','revelation','despair','revelation','cosmic','cosmic','sacrifice','sacrifice','sacrifice','cosmic','peace'
+        ];
+
+        const moodClasses = ['mood-hope','mood-love','mood-despair','mood-tragedy','mood-revelation','mood-cosmic','mood-sacrifice','mood-peace'];
+
+        let chapterElements = [];
+        let scrollFrame;
+
         function toggleTheme() {
             const body = document.body;
             const sunIcon = document.querySelector('.sun-icon');
             const moonIcon = document.querySelector('.moon-icon');
-            
+
             body.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                sunIcon.style.display = 'none';
-                moonIcon.style.display = 'block';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                sunIcon.style.display = 'block';
-                moonIcon.style.display = 'none';
-                localStorage.setItem('theme', 'light');
-            }
+            const darkEnabled = body.classList.contains('dark-mode');
+            sunIcon.style.display = darkEnabled ? 'none' : 'block';
+            moonIcon.style.display = darkEnabled ? 'block' : 'none';
+            localStorage.setItem('theme', darkEnabled ? 'dark' : 'light');
         }
 
-        // Apply mood-based background based on scroll position
+        function removeMoodClasses() {
+            document.body.classList.remove(...moodClasses);
+        }
+
+        function assignChapterIds() {
+            chapterElements = Array.from(document.querySelectorAll('.chapter'));
+            chapterElements.forEach((chapter, index) => {
+                const label = chapter.querySelector('.chapter-number')?.textContent?.trim().toLowerCase() || '';
+                const generatedId = label.includes('epilogue') ? 'epilogue' : `chapter${index + 1}`;
+                chapter.id = generatedId;
+                chapter.dataset.mood = chapterMoodSequence[index] || 'peace';
+            });
+        }
+
         function updateBackgroundMood() {
-            const scrollPosition = window.scrollY + window.innerHeight / 2;
-            let currentMood = null;
+            const marker = window.scrollY + window.innerHeight * 0.45;
+            let activeMood = chapterElements[0]?.dataset.mood;
 
-            // Find which chapter is currently in view
-            for (const [chapterId, mood] of Object.entries(chapterMoods)) {
-                const element = document.getElementById(chapterId) || 
-                               document.querySelector(`[id="${chapterId}"]`) ||
-                               document.querySelector(`.chapter:has(.${chapterId})`);
-                
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    const elementTop = rect.top + window.scrollY;
-                    const elementBottom = elementTop + rect.height;
-
-                    if (scrollPosition >= elementTop && scrollPosition <= elementBottom) {
-                        currentMood = mood;
-                        break;
-                    }
+            chapterElements.forEach((chapter) => {
+                const top = chapter.offsetTop;
+                const bottom = top + chapter.offsetHeight;
+                if (marker >= top && marker < bottom) {
+                    activeMood = chapter.dataset.mood;
                 }
-            }
+            });
 
-            // Remove all mood classes
-            document.body.classList.remove('mood-hope', 'mood-love', 'mood-despair', 
-                'mood-tragedy', 'mood-revelation', 'mood-cosmic', 'mood-sacrifice', 'mood-peace');
-            
-            // Add current mood class if found
-            if (currentMood) {
-                document.body.classList.add(`mood-${currentMood}`);
+            removeMoodClasses();
+            if (activeMood) {
+                document.body.classList.add(`mood-${activeMood}`);
             }
         }
 
-        // Animate chapter title underlines when they come into view
         function animateChapterTitles() {
-            const titles = document.querySelectorAll('.chapter-title');
-            
-            titles.forEach(title => {
-                const rect = title.getBoundingClientRect();
-                const isVisible = rect.top < window.innerHeight * 0.8 && rect.bottom > 0;
-                
-                if (isVisible && !title.classList.contains('animated')) {
+            document.querySelectorAll('.chapter-title').forEach((title) => {
+                const chapter = title.closest('.chapter');
+                if (chapter?.classList.contains('visible')) {
                     title.classList.add('animated');
                 }
             });
         }
 
-        // Scroll event handler with throttling for performance
-        let scrollTimeout;
         function handleScroll() {
-            if (scrollTimeout) {
-                window.cancelAnimationFrame(scrollTimeout);
-            }
-            
-            scrollTimeout = window.requestAnimationFrame(() => {
+            if (scrollFrame) cancelAnimationFrame(scrollFrame);
+            scrollFrame = requestAnimationFrame(() => {
                 updateBackgroundMood();
                 animateChapterTitles();
             });
         }
 
-        // Load saved theme and initialize animations on page load
         window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme');
+            const body = document.body;
             const sunIcon = document.querySelector('.sun-icon');
             const moonIcon = document.querySelector('.moon-icon');
             const navbar = document.querySelector('.navbar');
-            
-            // Apply saved theme
+            const NAVBAR_IDLE_DELAY = 2200;
+            let navbarIdleTimer;
+
+            assignChapterIds();
+
+            const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
-                document.body.classList.add('dark-mode');
+                body.classList.add('dark-mode');
                 sunIcon.style.display = 'none';
                 moonIcon.style.display = 'block';
             }
 
-            // Animate navbar sliding down
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+            chapterElements.forEach((chapter) => observer.observe(chapter));
+
+            const hideNavbar = () => {
+                if (navbar.classList.contains('loaded')) {
+                    navbar.classList.add('hidden');
+                }
+            };
+
+            const resetNavbarIdleTimer = () => {
+                navbar.classList.remove('hidden');
+                clearTimeout(navbarIdleTimer);
+                navbarIdleTimer = setTimeout(hideNavbar, NAVBAR_IDLE_DELAY);
+            };
+
             setTimeout(() => {
                 navbar.classList.add('loaded');
-            }, 100);
+                resetNavbarIdleTimer();
+            }, 120);
 
-            // Initialize scroll-based features
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            ['pointermove', 'touchstart', 'keydown', 'wheel', 'scroll'].forEach((eventName) => {
+                window.addEventListener(eventName, resetNavbarIdleTimer, { passive: true });
+            });
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    hideNavbar();
+                } else {
+                    resetNavbarIdleTimer();
+                }
+            });
+
             updateBackgroundMood();
             animateChapterTitles();
-
-            // Add scroll listener
-            window.addEventListener('scroll', handleScroll, { passive: true });
-
-            // Trigger initial animation for visible chapters
-            setTimeout(animateChapterTitles, 500);
+            setTimeout(() => chapterElements.forEach(ch => ch.classList.add('visible')), 500);
         });
 
-        // Add smooth scroll behavior for better UX
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
             anchor.addEventListener('click', function (e) {
-                e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
+
     </script>
 </body>
 </html>
