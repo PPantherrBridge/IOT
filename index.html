@@ -72,8 +72,8 @@
             background: color-mix(in srgb, var(--nav-tint) 28%, rgba(255, 255, 255, 0.22));
             border: 1px solid color-mix(in srgb, var(--nav-tint) 45%, rgba(255, 255, 255, 0.3));
             box-shadow: 0 12px 38px rgba(0, 0, 0, 0.26);
-            backdrop-filter: blur(22px) saturate(165%);
-            -webkit-backdrop-filter: blur(22px) saturate(165%);
+            backdrop-filter: blur(12px) saturate(145%);
+            -webkit-backdrop-filter: blur(12px) saturate(145%);
             z-index: 1000;
             opacity: 0;
             transition: transform 450ms ease, opacity 350ms ease, background 1200ms ease, border-color 1200ms ease;
@@ -134,6 +134,68 @@
         }
 
         .theme-toggle:hover svg { transform: rotate(15deg) scale(1.08); }
+
+
+        .menu-toggle {
+            display: none;
+            border: 1px solid color-mix(in srgb, var(--nav-tint) 45%, rgba(255, 255, 255, 0.45));
+            background: color-mix(in srgb, var(--nav-tint) 18%, rgba(255, 255, 255, 0.35));
+            border-radius: 999px;
+            width: 42px;
+            height: 42px;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+        }
+
+        .menu-toggle .bar {
+            width: 16px;
+            height: 2px;
+            border-radius: 99px;
+            background: #23253a;
+            transition: transform 250ms ease, opacity 250ms ease;
+        }
+
+        .menu-toggle[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+        .menu-toggle[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; }
+        .menu-toggle[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 10px);
+            right: 12px;
+            min-width: 210px;
+            padding: 10px;
+            border-radius: 14px;
+            background: color-mix(in srgb, var(--nav-tint) 28%, rgba(255, 255, 255, 0.55));
+            border: 1px solid color-mix(in srgb, var(--nav-tint) 45%, rgba(255, 255, 255, 0.35));
+            backdrop-filter: blur(10px) saturate(130%);
+            -webkit-backdrop-filter: blur(10px) saturate(130%);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
+            z-index: 1001;
+        }
+
+        .mobile-menu.open { display: block; }
+
+        .mobile-menu a {
+            display: block;
+            text-decoration: none;
+            color: rgba(24, 29, 42, 0.95);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 9px 10px;
+            border-radius: 9px;
+        }
+
+        .mobile-menu a:hover {
+            background: rgba(255, 255, 255, 0.35);
+            color: #2d3168;
+        }
 
         .page-wrapper {
             width: 100%;
@@ -307,21 +369,38 @@
             stroke: #ffe0c0;
         }
 
+        body.dark-mode .menu-toggle .bar {
+            background: #ffe0c0;
+        }
+
+        body.dark-mode .mobile-menu a {
+            color: rgba(243, 233, 218, 0.94);
+        }
+
+        body.dark-mode .mobile-menu a:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #ffd8af;
+        }
+
         body.dark-mode .book-content::before { opacity: 0.18; mix-blend-mode: screen; }
         body.dark-mode .chapter { background: rgba(38, 43, 56, 0.55); border-color: rgba(227, 203, 174, 0.24); }
         body.dark-mode .dialogue { color: #f8b98b; }
         body.dark-mode .emphasis { color: #ffcda2; }
 
         @media (max-width: 900px) {
-            .navbar-content { flex-wrap: wrap; justify-content: center; }
-            .navbar-title { width: 100%; text-align: center; }
+            .navbar-content { justify-content: space-between; }
+            .navbar-title { font-size: 0.82rem; letter-spacing: 0.12em; }
         }
 
         @media (max-width: 700px) {
-            .page-wrapper { padding-top: 116px; }
-            .navbar { top: 10px; }
-            .navbar-links { gap: 10px; flex-wrap: wrap; justify-content: center; }
-            .navbar-links a { font-size: 0.68rem; }
+            .page-wrapper { padding-top: 94px; }
+            .navbar { top: 8px; width: calc(100% - 16px); }
+            .navbar-content { padding: 7px 12px; gap: 8px; }
+            .navbar-title { font-size: 0.74rem; letter-spacing: 0.09em; }
+            .navbar-links a { display: none; }
+            .menu-toggle { display: inline-flex; }
+            .theme-toggle, .menu-toggle { width: 34px; height: 34px; }
+            .theme-toggle svg { width: 16px; height: 16px; }
             .content p { line-height: 1.75; }
         }
 
@@ -332,8 +411,13 @@
         <div class="navbar-content">
             <div class="navbar-title">Illusion of Tomorrow</div>
             <div class="navbar-links">
-                <a href="https://enochkofficial.github.io/EnochKOfficialWebPortfolio/" target="_blank">Enoch's Portfolio</a>
-                <a href="https://enochkofficial.github.io/InterochTheory/" target="_blank">Interoch Theory</a>
+                <a href="https://enochkofficial.github.io/EnochKOfficialWebPortfolio/" target="_blank" rel="noopener noreferrer">Enoch's Portfolio</a>
+                <a href="https://enochkofficial.github.io/InterochTheory/" target="_blank" rel="noopener noreferrer">Interoch Theory</a>
+                <button class="menu-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMobileMenu()">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
                 <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
                     <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -351,6 +435,10 @@
                     </svg>
                 </button>
             </div>
+        </div>
+        <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+            <a href="https://enochkofficial.github.io/EnochKOfficialWebPortfolio/" target="_blank" rel="noopener noreferrer">Enoch's Portfolio</a>
+            <a href="https://enochkofficial.github.io/InterochTheory/" target="_blank" rel="noopener noreferrer">Interoch Theory</a>
         </div>
     </nav>
 
@@ -1241,15 +1329,47 @@
             });
         }
 
+
+        function toggleMobileMenu(forceState) {
+            const menu = document.getElementById('mobile-menu');
+            const menuButton = document.querySelector('.menu-toggle');
+            if (!menu || !menuButton) return;
+
+            const shouldOpen = typeof forceState === 'boolean' ? forceState : !menu.classList.contains('open');
+            menu.classList.toggle('open', shouldOpen);
+            menuButton.setAttribute('aria-expanded', String(shouldOpen));
+            menu.setAttribute('aria-hidden', String(!shouldOpen));
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
             const body = document.body;
             const sunIcon = document.querySelector('.sun-icon');
             const moonIcon = document.querySelector('.moon-icon');
             const navbar = document.querySelector('.navbar');
+            const menuButton = document.querySelector('.menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
             const NAVBAR_IDLE_DELAY = 2200;
             let navbarIdleTimer;
 
             assignChapterIds();
+
+            if (menuButton && mobileMenu) {
+                mobileMenu.querySelectorAll('a').forEach((link) => {
+                    link.addEventListener('click', () => toggleMobileMenu(false));
+                });
+
+                document.addEventListener('click', (event) => {
+                    if (!navbar.contains(event.target)) {
+                        toggleMobileMenu(false);
+                    }
+                });
+
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth > 700) {
+                        toggleMobileMenu(false);
+                    }
+                });
+            }
 
             const savedTheme = localStorage.getItem('theme');
             if (savedTheme === 'dark') {
