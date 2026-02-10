@@ -82,7 +82,7 @@
             -webkit-backdrop-filter: blur(6px) saturate(130%) contrast(1.03);
             z-index: 1000;
             opacity: 0;
-            overflow: visible;
+            overflow: hidden;
             isolation: isolate;
             transition: transform 450ms ease, opacity 350ms ease, background 1200ms ease, border-color 1200ms ease, box-shadow 600ms ease;
         }
@@ -214,9 +214,9 @@
 
         .mobile-menu {
             display: none;
-            position: absolute;
-            top: calc(100% + 10px);
-            right: 12px;
+            position: fixed;
+            top: 62px;
+            right: 10px;
             min-width: 210px;
             padding: 10px;
             border-radius: 14px;
@@ -456,6 +456,7 @@
         @media (max-width: 700px) {
             .page-wrapper { padding-top: 94px; }
             .navbar { top: 8px; width: calc(100% - 16px); }
+            .mobile-menu { top: 52px; right: 8px; min-width: 200px; }
             .navbar-content { padding: 7px 12px; gap: 8px; }
             .navbar-title { font-size: 0.74rem; letter-spacing: 0.09em; }
             .navbar-links a { display: none; }
@@ -509,6 +510,11 @@
             <a href="https://enochkofficial.github.io/InterochTheory/" target="_blank" rel="noopener noreferrer">Interoch Theory</a>
         </div>
     </nav>
+
+    <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+        <a href="https://enochkofficial.github.io/EnochKOfficialWebPortfolio/" target="_blank" rel="noopener noreferrer">Enoch's Portfolio</a>
+        <a href="https://enochkofficial.github.io/InterochTheory/" target="_blank" rel="noopener noreferrer">Interoch Theory</a>
+    </div>
 
     <div class="page-wrapper">
         <div class="book-container">
@@ -1427,7 +1433,7 @@
                 });
 
                 document.addEventListener('click', (event) => {
-                    if (!navbar.contains(event.target)) {
+                    if (!navbar.contains(event.target) && !mobileMenu.contains(event.target)) {
                         toggleMobileMenu(false);
                     }
                 });
